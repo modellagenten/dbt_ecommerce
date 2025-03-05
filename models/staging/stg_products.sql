@@ -9,7 +9,6 @@ renamed as (
         description as product_description,
         category,
         subcategory,
-        brand,
         base_price,
         current_price,
         stock_quantity,
@@ -17,7 +16,6 @@ renamed as (
         supplier,
         weight_kg,
         is_active,
-        sku,
         created_at,
         updated_at
     from source

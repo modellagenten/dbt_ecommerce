@@ -12,7 +12,6 @@ renamed as (
         device_type,
         user_agent,
         ip_address,
-        page_url,
         referrer,
         product_id,
         created_at

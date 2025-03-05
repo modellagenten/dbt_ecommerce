@@ -15,9 +15,9 @@ final as (
         oi.order_item_id,
         oi.product_id,
         -- Dates
-        date_trunc('day', t.transaction_date) as order_date,
-        date_trunc('month', t.transaction_date) as order_month,
-        date_trunc('year', t.transaction_date) as order_year,
+        date_trunc('day', to_date(t.transaction_date)) as order_date,
+        date_trunc('month', to_date(t.transaction_date)) as order_month,
+        date_trunc('year', to_date(t.transaction_date)) as order_year,
         -- Order details
         t.payment_method,
         t.shipping_method,

@@ -25,11 +25,10 @@ final as (
         we.product_id,
         -- Event details
         we.event_timestamp,
-        date_trunc('day', we.event_timestamp) as event_date,
-        date_trunc('month', we.event_timestamp) as event_month,
+        date_trunc('day', to_date(we.event_timestamp)) as event_date,
+        date_trunc('month', to_Date(we.event_timestamp)) as event_month,
         we.event_type,
         we.device_type,
-        we.page_url,
         we.referrer,
         -- Session metrics
         sm.events_in_session,
