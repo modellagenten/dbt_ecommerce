@@ -31,4 +31,4 @@ models:
         +schema: marts
 
 vars:
-  source_schema: 'ecommerce' 
+  source_schema: 'PUBLIC' 

@@ -22,7 +22,6 @@ final as (
         p.product_description,
         p.category,
         p.subcategory,
-        p.brand,
         p.base_price,
         p.current_price,
         p.stock_quantity,
@@ -30,7 +29,6 @@ final as (
         p.supplier,
         p.weight_kg,
         p.is_active,
-        p.sku,
         -- Sales metrics
         coalesce(ps.number_of_orders, 0) as number_of_orders,
         coalesce(ps.total_quantity_sold, 0) as total_quantity_sold,
