@@ -12,6 +12,7 @@ customer_orders as (
     from {{ ref('stg_transactions') }}
     where status = 'COMPLETED'
     group by customer_id
+    -- comment
 ),
 
 final as (
