@@ -5,8 +5,8 @@ with source as (
 renamed as (
     select
         customer_id,
-        first_name,
-        last_name,
+        lower(first_name) as first_name,
+        upper(last_name) as last_name,
         email,
         phone,
         birth_date,
