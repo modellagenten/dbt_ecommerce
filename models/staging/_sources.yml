@@ -13,7 +13,14 @@ sources:
             tests:
               - unique
               - not_null
-      
+      - name: customer_support
+        description: 'Raw customer support data'
+        columns:
+          - name: ticket_id
+            description: 'Primary key'
+            tests:
+              - unique
+              - not_null
       - name: products
         description: 'Raw product data'
         columns:
