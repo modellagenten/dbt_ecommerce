@@ -18,10 +18,14 @@ product_sales as (
         p.product_id,
         count(distinct t.transaction_id) as number_of_orders,
         sum(oi.quantity) as total_quantity_sold,
-        sum(oi.total_price) as total_revenue
+        sum(oi.total_price) as total_revenue,
+        avg(sm.STOCK_LEVEL) as avg_stock_level,
+        avg(sm.QUALITY_SCORE) as avg_quality_score,
+        avg(sm.DELIVERY_DELAY) as avg_delivery_delay
     from {{ ref('stg_products') }} p
     left join {{ ref('stg_order_items') }} oi on p.product_id = oi.product_id
     left join {{ ref('stg_transactions') }} t on oi.transaction_id = t.transaction_id
+    left join {{ ref('stg_supplier_metrics') }} sm on p.product_id = sm.product_id
     where t.status = 'COMPLETED'
     group by p.product_id
 ),
@@ -57,6 +61,9 @@ final as (
             when p.current_price < 200 then 'Premium'
             else 'Luxury'
         end as price_tier,
+        ps.avg_stock_level,
+        ps.avg_quality_score,
+        ps.avg_delivery_delay,
         -- Timestamps
         p.created_at,
         p.updated_at,
