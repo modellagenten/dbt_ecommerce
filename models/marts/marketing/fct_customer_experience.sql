@@ -11,8 +11,8 @@ products as (
     from {{ ref('stg_customer_support')}}
     group by product_id
 
-)
-,
+),
+--comment 2
 final as (
     select oi.product_id,
     oi.item_quantity,
