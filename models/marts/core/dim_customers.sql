@@ -14,6 +14,19 @@ customer_orders as (
     group by customer_id
 ),
 
+customer_tickets as (
+    select
+        customer_id,
+        avg(SATISFACTION_SCORE) as AVG_SATISFACTION,
+        count(TICKET_ID) as CNT_TICKET_ID,
+        avg(RESOLUTION_TIME) as AVG_RESOLUTION_TIME
+    from {{ ref('stg_customer_support') }}
+    where 1 = 1
+    group by customer_id
+
+
+)
+,
 final as (
     select
         c.customer_id,
@@ -47,9 +60,13 @@ final as (
             when datediff('day', co.last_order_date, current_date) > 365 then 'Churned'
             when datediff('day', co.last_order_date, current_date) > 180 then 'At Risk'
             else 'Active'
-        end as customer_status
+        end as customer_status,
+        ti.AVG_RESOLUTION_TIME,
+        ti.CNT_TICKET_ID,
+        ti.AVG_SATISFACTION
     from customers c
     left join customer_orders co on c.customer_id = co.customer_id
+    left join customer_tickets ti on ti.customer_id = c.customer_id
 )
 
 select * from final 
