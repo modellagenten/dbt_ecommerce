@@ -9,7 +9,23 @@ sources:
         description: "Raw customer data"
         columns:
           - name: customer_id
-            description: "Primary key"
+            description: 'Primary key'
+            tests:
+              - unique
+              - not_null
+      - name: customer_support
+        description: 'Raw customer support data'
+        columns:
+          - name: ticket_id
+            description: 'Primary key'
+            tests:
+              - unique
+              - not_null
+      - name: products
+        description: 'Raw product data'
+        columns:
+          - name: product_id
+            description: 'Primary key'
             tests:
               - unique
               - not_null
@@ -97,4 +113,12 @@ sources:
               - relationships:
                   to: source('ecommerce', 'products')
                   field: product_id
-                  severity: warn # Optional relationship
+                  severity: warn  # Optional relationship 
+      - name: supplier_metrics
+        description: 'Raw metrics data'
+        columns:
+          - name: supplier_id
+            description: 'Primary key'
+            tests:
+              - unique
+              - not_null
