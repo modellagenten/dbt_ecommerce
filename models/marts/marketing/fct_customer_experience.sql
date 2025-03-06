@@ -12,7 +12,7 @@ products as (
     group by product_id
 
 ),
---comment 2
+--comment 3
 final as (
     select oi.product_id,
     oi.item_quantity,
