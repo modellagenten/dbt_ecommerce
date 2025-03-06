@@ -23,3 +23,4 @@ final as (
 )
 
 select * from final
+--comment 4
