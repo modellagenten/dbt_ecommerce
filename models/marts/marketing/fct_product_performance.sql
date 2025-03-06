@@ -10,6 +10,7 @@ product_reviews as (
         updated_at,
         DATEDIFF(hour, updated_at , created_at)
     from {{ ref('stg_products_reviews') }} pr
+    -- comment
 ),
 
 product_sales as (
