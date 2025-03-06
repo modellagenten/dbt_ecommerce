@@ -90,3 +90,11 @@ sources:
                   to: source('ecommerce', 'products')
                   field: product_id
                   severity: warn  # Optional relationship 
+      - name: supplier_metrics
+        description: 'Raw metrics data'
+        columns:
+          - name: supplier_id
+            description: 'Primary key'
+            tests:
+              - unique
+              - not_null
