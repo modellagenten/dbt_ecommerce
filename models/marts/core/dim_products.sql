@@ -2,6 +2,17 @@ with products as (
     select * from {{ ref('stg_products') }}
 ),
 
+product_reviews as (
+    select
+        product_id,
+        COUNT(1) as cnt_rating,
+        avg(RATING) as avg_rating,
+        avg(HELPFUL_VOTES) as avg_helpful_votes,
+        SUM(num_verified_purchase) as num_verified_purchase
+    from {{ ref('stg_products_reviews') }} pr
+    group by product_id
+),
+
 product_sales as (
     select
         p.product_id,
@@ -48,9 +59,14 @@ final as (
         end as price_tier,
         -- Timestamps
         p.created_at,
-        p.updated_at
+        p.updated_at,
+        pr.avg_rating,
+        pr.cnt_rating,
+        pr.avg_helpful_votes,
+        pr.num_verified_purchase
     from products p
     left join product_sales ps on p.product_id = ps.product_id
+    left join product_reviews pr on p.product_id = pr.product_id
 )
 
 select * from final 
