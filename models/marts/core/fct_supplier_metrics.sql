@@ -7,6 +7,7 @@ final as (
         -- Keys
         sm.product_id,
         sm.SUPPLIER_ID,
+        -- comment
         -- Dates
         to_date(sm.DELIVERY_DATE) as delivery_date_,
         -- amounts
