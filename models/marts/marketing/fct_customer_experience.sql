@@ -3,6 +3,7 @@ with orders as
     select sum(case when order_status = 'COMPLETED' then item_quantity else 0 end) as item_quantity
     ,product_id 
 from {{ ref('fct_orders') }}
+-- comment
 group by product_id
 ),
 products as (
