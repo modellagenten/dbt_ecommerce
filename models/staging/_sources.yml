@@ -2,11 +2,11 @@ version: 2
 
 sources:
   - name: ecommerce
-    description: 'Raw e-commerce data from operational system'
+    description: "Raw e-commerce data from operational system"
     schema: "{{ var('source_schema') }}"
     tables:
       - name: customers
-        description: 'Raw customer data'
+        description: "Raw customer data"
         columns:
           - name: customer_id
             description: 'Primary key'
@@ -22,76 +22,84 @@ sources:
               - unique
               - not_null
       - name: products
-        description: 'Raw product data'
+        description: "Raw product data"
         columns:
           - name: product_id
-            description: 'Primary key'
+            description: "Primary key"
             tests:
               - unique
               - not_null
 
+      - name: social_media_posts
+        description: "Raw socialmedia data"
+        columns:
+          - name: post_id
+            description: "Primary key"
+            tests:
+              - unique
+              - not_null
       - name: transactions
-        description: 'Raw transaction data'
+        description: "Raw transaction data"
         columns:
           - name: transaction_id
-            description: 'Primary key'
+            description: "Primary key"
             tests:
               - unique
               - not_null
           - name: customer_id
-            description: 'Foreign key to customers'
+            description: "Foreign key to customers"
             tests:
               - relationships:
                   to: source('ecommerce', 'customers')
                   field: customer_id
 
       - name: order_items
-        description: 'Raw order item data'
+        description: "Raw order item data"
         columns:
           - name: order_item_id
-            description: 'Primary key'
+            description: "Primary key"
             tests:
               - unique
               - not_null
           - name: transaction_id
-            description: 'Foreign key to transactions'
+            description: "Foreign key to transactions"
             tests:
               - relationships:
                   to: source('ecommerce', 'transactions')
                   field: transaction_id
           - name: product_id
-            description: 'Foreign key to products'
+            description: "Foreign key to products"
             tests:
               - relationships:
                   to: source('ecommerce', 'products')
                   field: product_id
 
       - name: marketing_campaigns
-        description: 'Raw marketing campaign data'
+        description: "Raw marketing campaign data"
         columns:
           - name: campaign_id
-            description: 'Primary key'
+            description: "Primary key"
             tests:
               - unique
               - not_null
 
       - name: web_events
-        description: 'Raw web event data'
+        description: "Raw web event data"
         columns:
           - name: event_id
-            description: 'Primary key'
+            description: "Primary key"
             tests:
               - unique
               - not_null
           - name: customer_id
-            description: 'Foreign key to customers (optional)'
+            description: "Foreign key to customers (optional)"
             tests:
               - relationships:
                   to: source('ecommerce', 'customers')
                   field: customer_id
-                  severity: warn  # Optional relationship
+                  severity: warn # Optional relationship
           - name: product_id
-            description: 'Foreign key to products (optional)'
+            description: "Foreign key to products (optional)"
             tests:
               - relationships:
                   to: source('ecommerce', 'products')
