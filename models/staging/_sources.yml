@@ -105,6 +105,7 @@ sources:
                   to: source('ecommerce', 'products')
                   field: product_id
                   severity: warn  # Optional relationship 
+      - name: product_reviews
       - name: supplier_metrics
         description: 'Raw metrics data'
         columns:
