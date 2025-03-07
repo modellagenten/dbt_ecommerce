@@ -1,0 +1,11 @@
+# _sources.yml
+version: 2
+
+sources:
+  - name: snowflake_sample
+    database: "{{ env_var('DBT_SAMPLE_DATABASE', 'SNOWFLAKE_SAMPLE_DATA')
+}}"
+    schema: TPCH_SF100
+    tables:
+      - name: customer
+        description: "Customer table from TPC-H dataset"

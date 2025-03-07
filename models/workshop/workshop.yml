@@ -1,0 +1,20 @@
+# workshop.yml
+version: 2
+
+models:
+  - name: customer_analysis
+    description: "Customer data with clustering"
+    config:
+      materialized: table
+      cluster_by: ['c_mktsegment', 'c_nationkey']
+    columns:
+      - name: c_custkey
+        description: "Primary key for customer"
+        tests:
+          - unique
+          - not_null
+      - name: c_mktsegment
+        description: "Market segment (part of clustering key)"
+      - name: c_nationkey
+        description: "Nation key (part of clustering key)"
+        
